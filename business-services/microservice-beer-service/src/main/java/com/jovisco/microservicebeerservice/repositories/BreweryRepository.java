@@ -2,8 +2,9 @@ package com.jovisco.microservicebeerservice.repositories;
 
 import java.util.UUID;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
 import com.jovisco.microservicebeerservice.domain.Brewery;
 
-public interface BreweryRepository extends JpaRepository<Brewery, UUID> {}
+public interface BreweryRepository extends ReactiveCrudRepository<Brewery, UUID> {
+}

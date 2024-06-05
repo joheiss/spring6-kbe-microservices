@@ -51,10 +51,10 @@ public class Beer {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @NotBlank 
+    @NotBlank
     @NotNull
-    @Size(max = 50) 
-    @Column(length = 50) 
+    @Size(max = 50)
+    @Column(length = 50)
     private String name;
 
     @NotNull
@@ -63,10 +63,10 @@ public class Beer {
 
     @NotBlank
     @NotNull
+    @Size(max = 36)
     @Column(unique = true)
     private String upc;
 
-    
     private BigDecimal price;
 
     private Integer minOnHand;

@@ -2,17 +2,21 @@ package com.jovisco.microservicebeerservice.repositories;
 
 import java.util.UUID;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
 import com.jovisco.microservicebeerservice.domain.Beer;
 import com.jovisco.microservicebeerservice.domain.BeerStyle;
 
-public interface BeerRepository extends JpaRepository<Beer, UUID> {
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-    Page<Beer> findAllByName(String name, Pageable pageable);
-    Page<Beer> findAllByStyle(BeerStyle style, Pageable pageable);
-    Page<Beer> findAllByNameAndStyle(String name, BeerStyle style, Pageable pageable);
-    Beer findByUpc(String upc);
+public interface BeerRepository extends ReactiveCrudRepository<Beer, UUID> {
+
+    Flux<Beer> findAllByName(String name);
+
+    Flux<Beer> findAllByStyle(BeerStyle style);
+
+    Flux<Beer> findAllByNameAndStyle(String name, BeerStyle style);
+
+    Mono<Beer> findByUpc(String upc);
 }
