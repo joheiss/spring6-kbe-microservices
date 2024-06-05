@@ -1,4 +1,7 @@
-CREATE TABLE if NOT EXISTS beers (
+-- CREATE DATABASE IF NOT EXISTS beerservice CHARACTER
+-- SET
+--     utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE TABLE if NOT EXISTS beer (
     id varchar(36) not null PRIMARY KEY,
     name varchar(50),
     style varchar(50),
@@ -10,7 +13,7 @@ CREATE TABLE if NOT EXISTS beers (
     version integer
 );
 
-CREATE TABLE if NOT EXISTS breweries (
+CREATE TABLE if NOT EXISTS brewery (
     id varchar(36) not null PRIMARY KEY,
     name varchar(255),
     created_at datetime (6),

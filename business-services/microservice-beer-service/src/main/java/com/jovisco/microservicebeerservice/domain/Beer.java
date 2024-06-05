@@ -5,10 +5,12 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.type.SqlTypes;
+import org.springframework.data.relational.core.mapping.Table;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,11 +34,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity
+// @Table(name = "beers")
 public class Beer {
 
     @Id
     @GeneratedValue(generator = "UUID")
-    @UuidGenerator(style = UuidGenerator.Style.TIME)
+    // @UuidGenerator(style = UuidGenerator.Style.TIME)
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    // @Type(type = "org.hibernate.type.UUIDCharType")
     @JdbcTypeCode(SqlTypes.CHAR)
     @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
     private UUID id;
@@ -50,6 +55,10 @@ public class Beer {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    public boolean isNew() {
+        return this.id == null;
+    }
 
     @NotBlank
     @NotNull

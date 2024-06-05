@@ -4,10 +4,12 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.type.SqlTypes;
+import org.springframework.data.relational.core.mapping.Table;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,11 +31,14 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 @Entity
+// @Table(name = "breweries")
+
 public class Brewery {
 
     @Id
     @GeneratedValue(generator = "UUID")
-    @UuidGenerator(style = UuidGenerator.Style.TIME)
+    // @UuidGenerator(style = UuidGenerator.Style.TIME)
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @JdbcTypeCode(SqlTypes.CHAR)
     @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
     private UUID id;
@@ -48,10 +53,14 @@ public class Brewery {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @NotBlank 
+    public boolean isNew() {
+        return this.id == null;
+    }
+
+    @NotBlank
     @NotNull
-    @Size(max = 50) 
-    @Column(length = 50) 
+    @Size(max = 50)
+    @Column(length = 50)
     private String name;
 
 }

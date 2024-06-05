@@ -134,13 +134,15 @@ public class BootstrapData implements CommandLineRunner {
 
         private void loadBreweryData() {
 
-                if (breweryRepository.count().block() > 0)
-                        return;
-
-                breweryRepository.save(Brewery
-                                .builder()
-                                .name("Cage Brewing")
-                                .build())
-                                .block();
+                var count = breweryRepository.count().block();
+                if (count == 0) {
+                        log.debug("Load breweries to database ...");
+                        breweryRepository.save(Brewery
+                                        .builder()
+                                        .name("Cage Brewing")
+                                        .build())
+                                        .block();
+                }
         }
+
 }

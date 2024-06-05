@@ -1,0 +1,16 @@
+@baseUrl = http://localhost:8071
+
+@apiUrl = {{baseUrl}}/api/v1/beers
+
+
+GET {{baseUrl}}/actuator/health
+
+###
+
+GET http://localhost:8071/actuator/health
+
+###
+
+GET {{apiUrl}}
+
+###
