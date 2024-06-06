@@ -9,9 +9,8 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-	<groupId>com.jovisco</groupId>
 	<artifactId>business-services</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+
 	<name>business-services</name>
 
 	<packaging>pom</packaging>
