@@ -2,7 +2,6 @@ package com.jovisco.microservicebeerservice.dtos;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -17,15 +16,15 @@ import lombok.NoArgsConstructor;
 @Builder
 public class BeerOrderDTO {
 
-    private UUID id;
+    private Long id;
 
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssZ", shape = JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", shape = JsonFormat.Shape.STRING)
     private LocalDateTime createdAt;
 
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssZ", shape = JsonFormat.Shape.STRING)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ssZ", shape = JsonFormat.Shape.STRING)
     private LocalDateTime updatedAt;
 
-    private UUID customerId;
+    private Long customerId;
 
     private String customerRef;
 

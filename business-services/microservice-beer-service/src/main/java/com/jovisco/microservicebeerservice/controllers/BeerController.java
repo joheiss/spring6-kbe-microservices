@@ -1,7 +1,5 @@
 package com.jovisco.microservicebeerservice.controllers;
 
-import java.util.UUID;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -39,7 +37,7 @@ public class BeerController {
     }
 
     @GetMapping(BEER_ID_PATH)
-    Mono<BeerDTO> getBeerById(@PathVariable UUID id) {
+    Mono<BeerDTO> getBeerById(@PathVariable Long id) {
         return beerService.findById(id);
     }
 
@@ -66,14 +64,14 @@ public class BeerController {
 
     @PutMapping(BEER_ID_PATH)
     Mono<ResponseEntity<Void>> updateBeer(
-            @PathVariable UUID id,
+            @PathVariable Long id,
             @Validated @RequestBody BeerDTO updateDTO) {
         return beerService.update(id, updateDTO)
                 .map(updated -> ResponseEntity.noContent().build());
     }
 
     @DeleteMapping(BEER_ID_PATH)
-    Mono<ResponseEntity<Void>> deleteBeer(@PathVariable UUID id) {
+    Mono<ResponseEntity<Void>> deleteBeer(@PathVariable Long id) {
         return beerService.delete(id)
                 .thenReturn(ResponseEntity.noContent().build());
     }

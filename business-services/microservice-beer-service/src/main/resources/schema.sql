@@ -2,7 +2,7 @@
 -- SET
 --     utf8mb4 COLLATE utf8mb4_unicode_ci;
 CREATE TABLE if NOT EXISTS beers (
-    id varchar(36) not null PRIMARY KEY,
+    id serial PRIMARY KEY,
     name varchar(50),
     style varchar(50),
     upc varchar(36),
@@ -16,7 +16,7 @@ CREATE TABLE if NOT EXISTS beers (
 );
 
 CREATE TABLE if NOT EXISTS breweries (
-    id varchar(36) not null PRIMARY KEY,
+    id serial PRIMARY KEY,
     name varchar(255),
     created_at datetime (6),
     updated_at datetime (6),

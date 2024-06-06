@@ -1,6 +1,5 @@
 package com.jovisco.microservicebeerservice.services;
 
-import java.util.UUID;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -49,7 +48,7 @@ public class BeerServiceImpl implements BeerService {
 
     @Cacheable(cacheNames = "beerCache", key = "#id")
     @Override
-    public Mono<BeerDTO> findById(UUID id) {
+    public Mono<BeerDTO> findById(Long id) {
 
         log.debug("Find beer by id ...");
 
@@ -57,7 +56,7 @@ public class BeerServiceImpl implements BeerService {
                 .findById(id)
                 .map(beerMapper::toDto)
                 .switchIfEmpty(
-                        Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "Beer not found. UUID: " + id)));
+                        Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "Beer not found. ID: " + id)));
     }
 
     @Cacheable(cacheNames = "beerUpcCache")
@@ -84,14 +83,14 @@ public class BeerServiceImpl implements BeerService {
     }
 
     @Override
-    public Mono<BeerDTO> update(UUID id, BeerDTO updateDTO) {
+    public Mono<BeerDTO> update(Long id, BeerDTO updateDTO) {
 
         log.debug("Update beer ...");
 
         return beerRepository
                 .findById(id)
                 .switchIfEmpty(
-                        Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "Beer not found. UUID: " + id)))
+                        Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "Beer not found. ID: " + id)))
                 .map(beer -> {
                     beer.setName(updateDTO.getName());
                     beer.setStyle(updateDTO.getStyle());
@@ -104,7 +103,7 @@ public class BeerServiceImpl implements BeerService {
     }
 
     @Override
-    public Mono<Object> delete(UUID id) {
+    public Mono<Object> delete(Long id) {
 
         log.debug("Delete beer ...");
 
