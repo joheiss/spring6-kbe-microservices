@@ -31,15 +31,15 @@ public class BeerServiceImpl implements BeerService {
 
         log.debug("Get list of beers ...");
 
-        if (StringUtils.hasText(name) && StringUtils.hasText(style.toString())) {
+        if (StringUtils.hasText(name) && style != null) {
             // search for beer by name and style
             return beerRepository
                     .findAllByNameAndStyle(name, style)
                     .map(beerMapper::toDto);
-        } else if (StringUtils.hasText(name) && !StringUtils.hasText(style.toString())) {
+        } else if (StringUtils.hasText(name) && style == null) {
             // search for beer by name
             return beerRepository.findAllByName(name).map(beerMapper::toDto);
-        } else if (!StringUtils.hasText(name) && StringUtils.hasText(style.toString())) {
+        } else if (!StringUtils.hasText(name) && style != null) {
             // search beer by style
             return beerRepository.findAllByStyle(style).map(beerMapper::toDto);
         } else {

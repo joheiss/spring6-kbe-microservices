@@ -33,8 +33,8 @@ public class BeerController {
 
     @GetMapping(BEER_PATH)
     Flux<BeerDTO> getAllBeers(
-            @RequestParam("name") String name,
-            @RequestParam("style") BeerStyle style) {
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) BeerStyle style) {
         return beerService.getList(name, style);
     }
 

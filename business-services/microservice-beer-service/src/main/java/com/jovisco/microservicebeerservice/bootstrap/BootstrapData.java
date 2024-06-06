@@ -1,5 +1,7 @@
 package com.jovisco.microservicebeerservice.bootstrap;
 
+import java.util.UUID;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Component;
@@ -41,7 +43,7 @@ public class BootstrapData implements CommandLineRunner {
                 loadBeerData();
 
                 cacheManager.getCache("beerListCache").clear();
-                log.debug("Data Initialized. Beer Records loaded {}", beerRepository.count());
+                log.debug("Data Initialized. Beer Records loaded {}", beerRepository.count().block());
         }
 
         private void loadBeerData() {
@@ -49,6 +51,7 @@ public class BootstrapData implements CommandLineRunner {
                 beerRepository.deleteAll().block();
 
                 beerRepository.save(Beer.builder()
+                                .id(UUID.randomUUID())
                                 .name("Mango Bobs")
                                 .style(BeerStyle.IPA)
                                 .minOnHand(12)
@@ -59,6 +62,7 @@ public class BootstrapData implements CommandLineRunner {
                                 .block();
 
                 beerRepository.save(Beer.builder()
+                                .id(UUID.randomUUID())
                                 .name("Galaxy Cat")
                                 .style(BeerStyle.PALE_ALE)
                                 .minOnHand(12)
@@ -68,6 +72,7 @@ public class BootstrapData implements CommandLineRunner {
                                 .block();
 
                 beerRepository.save(Beer.builder()
+                                .id(UUID.randomUUID())
                                 .name("Pinball Porter")
                                 .style(BeerStyle.PORTER)
                                 .minOnHand(12)
@@ -77,6 +82,7 @@ public class BootstrapData implements CommandLineRunner {
                                 .block();
 
                 beerRepository.save(Beer.builder()
+                                .id(UUID.randomUUID())
                                 .name("Golden Buddha")
                                 .style(BeerStyle.IPA)
                                 .minOnHand(12)
@@ -86,6 +92,7 @@ public class BootstrapData implements CommandLineRunner {
                                 .block();
 
                 beerRepository.save(Beer.builder()
+                                .id(UUID.randomUUID())
                                 .name("Cage Blond")
                                 .style(BeerStyle.ALE)
                                 .minOnHand(12)
@@ -95,6 +102,7 @@ public class BootstrapData implements CommandLineRunner {
                                 .block();
 
                 beerRepository.save(Beer.builder()
+                                .id(UUID.randomUUID())
                                 .name("Amarmillo IPA")
                                 .style(BeerStyle.IPA)
                                 .minOnHand(12)
@@ -104,6 +112,7 @@ public class BootstrapData implements CommandLineRunner {
                                 .block();
 
                 beerRepository.save(Beer.builder()
+                                .id(UUID.randomUUID())
                                 .name("King Krush")
                                 .style(BeerStyle.IPA)
                                 .minOnHand(12)
@@ -113,6 +122,7 @@ public class BootstrapData implements CommandLineRunner {
                                 .block();
 
                 beerRepository.save(Beer.builder()
+                                .id(UUID.randomUUID())
                                 .name("Static IPA")
                                 .style(BeerStyle.IPA)
                                 .minOnHand(12)
@@ -122,6 +132,7 @@ public class BootstrapData implements CommandLineRunner {
                                 .block();
 
                 beerRepository.save(Beer.builder()
+                                .id(UUID.randomUUID())
                                 .name("Grand Central")
                                 .style(BeerStyle.ALE)
                                 .minOnHand(12)
@@ -139,6 +150,7 @@ public class BootstrapData implements CommandLineRunner {
                         log.debug("Load breweries to database ...");
                         breweryRepository.save(Brewery
                                         .builder()
+                                        .id(UUID.randomUUID())
                                         .name("Cage Brewing")
                                         .build())
                                         .block();
